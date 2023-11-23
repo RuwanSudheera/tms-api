@@ -1,0 +1,16 @@
+# Ignore log files
+*.log
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore environment variables file (if applicable)
+.env
+
+# Ignore build output or compiled files
+/build/
+/dist/
+
+# Ignore OS or editor-specific files
+.DS_Store
+.vscode/
