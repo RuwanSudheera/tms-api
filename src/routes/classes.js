@@ -3,10 +3,10 @@ const router = express.Router();
 const classesController = require('../controllers/classesController');
 
 // Define teachers routes here
-router.post('/', classesController.createTeacher);
-router.get('/', classesController.getAllTeachers);
-router.get('/:id', classesController.getTeacherById);
-router.put('/:id', classesController.updateTeacher);
-router.delete('/:id', classesController.deleteTeacher);
+router.post('/', classesController.createClass);
+router.get('/', classesController.getAllClasses);
+router.get('/:id', classesController.getClassById);
+router.put('/:id', classesController.updateClass);
+router.delete('/:id', classesController.deleteClass);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../../config/database');
 const Teacher = require('./Teacher'); // Import the Teacher model
 
 const Class = sequelize.define('Class', {
@@ -13,6 +13,10 @@ const Class = sequelize.define('Class', {
     allowNull: false,
   },
   grade: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  room_no: {
     type: DataTypes.STRING,
     allowNull: false,
   },

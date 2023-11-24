@@ -7,7 +7,7 @@ exports.createTeacher = async (req, res) => {
     const teacher = await teacherService.createTeacher(teacherData);
     res.status(201).json(teacher);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 

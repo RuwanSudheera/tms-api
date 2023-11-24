@@ -1,56 +1,59 @@
-const teacherService = require('../services/teacherService');
+const classService = require('../services/classService');
 
-// Create a new teacher
-exports.createTeacher = async (req, res) => {
+const getAllClasses = async (req, res) => {
   try {
-    const teacherData = req.body;
-    const teacher = await teacherService.createTeacher(teacherData);
-    res.status(201).json(teacher);
+    const classes = await classService.getAllClasses();
+    res.json({ classes });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).send(error.message);
   }
 };
 
-// Get all teachers
-exports.getAllTeachers = async (req, res) => {
+const getClassById = async (req, res) => {
+  const id = parseInt(req.params.id);
   try {
-    const teachers = await teacherService.getAllTeachers();
-    res.status(200).json(teachers);
+    const classInfo = await classService.getClassById(id);
+    res.json({ classInfo });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(404).send(error.message);
   }
 };
 
-// Get a teacher by ID
-exports.getTeacherById = async (req, res) => {
+const createClass = async (req, res) => {
+  const classData = req.body;
   try {
-    const id = req.params.id;
-    const teacher = await teacherService.getTeacherById(id);
-    res.status(200).json(teacher);
+    const newClass = await classService.createClass(classData);
+    res.status(201).json({ newClass });
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(400).send(error.message);
   }
 };
 
-// Update a teacher by ID
-exports.updateTeacher = async (req, res) => {
+const updateClass = async (req, res) => {
+  const id = parseInt(req.params.id);
+  const classData = req.body;
   try {
-    const id = req.params.id;
-    const teacherData = req.body;
-    const updatedTeacher = await teacherService.updateTeacher(id, teacherData);
-    res.status(200).json(updatedTeacher);
+    const updatedClass = await classService.updateClass(id, classData);
+    res.json({ updatedClass });
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(400).send(error.message);
   }
 };
 
-// Delete a teacher by ID
-exports.deleteTeacher = async (req, res) => {
+const deleteClass = async (req, res) => {
+  const id = parseInt(req.params.id);
   try {
-    const id = req.params.id;
-    await teacherService.deleteTeacher(id);
-    res.status(204).send();
+    await classService.deleteClass(id);
+    res.status(204).send('Class deleted');
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).send(error.message);
   }
+};
+
+module.exports = {
+  getAllClasses,
+  getClassById,
+  createClass,
+  updateClass,
+  deleteClass
 };
