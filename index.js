@@ -1,9 +1,12 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const port = process.env.PORT || 9000;
+const loggerMiddleware = require('./src/middlewares/loggerMiddleware');
 
 // Middlewares
 app.use(express.json());
+app.use(loggerMiddleware);
 
 // Routes
 const studentRoutes = require('./src/routes/students');

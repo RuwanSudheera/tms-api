@@ -5,9 +5,9 @@ exports.createTeacher = async (req, res) => {
   try {
     const teacherData = req.body;
     const teacher = await teacherService.createTeacher(teacherData);
-    res.status(201).json(teacher);
+    res.status(201).json({success: true, data: teacher});
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ success: false, error: error.message });
   }
 };
 
@@ -15,9 +15,9 @@ exports.createTeacher = async (req, res) => {
 exports.getAllTeachers = async (req, res) => {
   try {
     const teachers = await teacherService.getAllTeachers();
-    res.status(200).json(teachers);
+    res.status(200).json({success: true, data: teachers});
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
@@ -26,9 +26,9 @@ exports.getTeacherById = async (req, res) => {
   try {
     const id = req.params.id;
     const teacher = await teacherService.getTeacherById(id);
-    res.status(200).json(teacher);
+    res.status(200).json({success: true, data: teacher});
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ success: false, error: error.message });
   }
 };
 
@@ -38,9 +38,9 @@ exports.updateTeacher = async (req, res) => {
     const id = req.params.id;
     const teacherData = req.body;
     const updatedTeacher = await teacherService.updateTeacher(id, teacherData);
-    res.status(200).json(updatedTeacher);
+    res.status(200).json({success: true, data: updatedTeacher});
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ success: false, error: error.message });
   }
 };
 
@@ -51,6 +51,6 @@ exports.deleteTeacher = async (req, res) => {
     await teacherService.deleteTeacher(id);
     res.status(204).send();
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ success: false, error: error.message });
   }
 };

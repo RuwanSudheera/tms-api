@@ -5,7 +5,7 @@ const sequelize = new Sequelize({
   dialect: 'mysql',
   host: 'localhost', // Your database host
   username: 'root', // Your database username
-  password: 'Ro0t@6789&', // Your database password
+  password: 'root', // Your database password
   database: 'tuition_system', // Your database name
   port: 3306, // Your database port (default is 3306)
 });

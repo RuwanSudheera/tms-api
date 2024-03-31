@@ -3,9 +3,9 @@ const paymentService = require('../services/paymentService');
 const getAllPaymentsController = async (req, res) => {
   try {
     const payments = await paymentService.getAllPayments();
-    res.json({ payments });
+    res.json({ success: true, data: payments });
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).send({success: false, error: error.message});
   }
 };
 
@@ -16,9 +16,9 @@ const getPaymentByIdController = async (req, res) => {
     if (!payment) {
       throw new Error('Payment not found');
     }
-    res.json({ payment });
+    res.json({ success: true, data: payment });
   } catch (error) {
-    res.status(404).send(error.message);
+    res.status(404).send({success: false, error: error.message});
   }
 };
 
@@ -26,9 +26,9 @@ const createPaymentController = async (req, res) => {
   const paymentData = req.body;
   try {
     const payment = await paymentService.createPayment(paymentData);
-    res.status(201).json({ payment });
+    res.status(201).json({ success: true, data: payment });
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).send({success: false, error: error.message});
   }
 };
 
@@ -40,9 +40,9 @@ const updatePaymentController = async (req, res) => {
     if (!payment) {
       throw new Error('Payment not found');
     }
-    res.json({ payment });
+    res.json({ success: true, data: payment });
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).send({success: false, error: error.message});
   }
 };
 
@@ -52,7 +52,7 @@ const deletePaymentController = async (req, res) => {
     await paymentService.deletePayment(id);
     res.status(204).send('Payment deleted');
   } catch (error) {
-    res.status(404).send(error.message);
+    res.status(404).send({success: false, error: error.message});
   }
 };
 
